@@ -1,0 +1,49 @@
+pharmacy = {}
+def add(name, price, quantity):
+    if name not in pharmacy:
+        pharmacy[name] = {"quantity": quantity, "price": price}
+        print("Added", quantity, "units of", name, "at Rs.", price, "each.")
+    else:
+        c = pharmacy[name].get("quantity")
+        c += quantity
+        pharmacy[name].update({"quantity": c, "price": price})
+        print("ADDED", quantity, "UNITS OF", name, "AT Rs.", price,
+              "EACH.")
+
+def sell(name, b):
+    if name not in pharmacy:
+        print("THIS MEDICINE IS NOT AVAILABLE")
+        return
+    if pharmacy[name]["quantity"] < b:
+        print(name, pharmacy[name].get("quantity"), "UNITS LEFT")
+        return
+    pharmacy[name]["quantity"] -= b
+    total_amount = b * pharmacy[name]["price"]
+    print(b, "UNITS OF", name, "Rs.", total_amount)
+
+
+def intro():
+    print("1.ADD MEDICINE.")
+    print("2.SELL MEDICINE.")
+    print("3.DISPLAY STOCK.")
+    print("4.EXIT.")
+
+def main():
+    while True:
+        intro()
+        a = int(input("ENTER YOUR CHOICE :"))
+        if a == 1:
+            name = input("ENTER MEDICINE NAME :")
+            price = int(input("ENTER PRICE PER UNIT :"))
+            quantity = int(input("ENTER MEDICINE QUANTITY :"))
+            add(name, price, quantity)
+        if a == 3:
+            print(pharmacy)
+        if a == 2:
+            name = input("MEDICINE NAME:")
+            b = int(input("QUANTITY:"))
+            sell(name, b)
+        if a == 4:
+            break
+if '__main__' == main():
+        main()
